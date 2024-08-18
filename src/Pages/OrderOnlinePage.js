@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Grid, Card, CardContent, Typography, Button, FormControl, InputLabel, Select, MenuItem, Box, InputAdornment, Badge, Tooltip } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Button, FormControl, InputLabel, Select, MenuItem, Box, InputAdornment, Badge, Tooltip, CircularProgress } from '@mui/material';
 import { CategoryOutlined, Fastfood, Cake, Coffee } from '@mui/icons-material';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import DiningIcon from '@mui/icons-material/Dining';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import Loader from '../Components/Loader/Loader';
 
 const OrderOnlinePage = () => {
     const [foods, setFoods] = useState([]);
@@ -13,6 +14,7 @@ const OrderOnlinePage = () => {
     const [selectedItems, setSelectedItems] = useState([]);
     const [itemCount, setItemCount] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
@@ -20,9 +22,13 @@ const OrderOnlinePage = () => {
         axios.get('https://food-orderingapp-backend.onrender.com/api/foods')
           .then(response => {
             setFoods(response.data);
-            setFilteredFoods(response.data); // Set initial filtered list
+            setFilteredFoods(response.data);
+            setLoading(false); // Data fetched, stop loading
           })
-          .catch(error => console.error(error));
+          .catch(error => {
+            console.error(error);
+            setLoading(false); // Stop loading even if there's an error
+          });
     }, []);
 
     useEffect(() => {
@@ -48,6 +54,10 @@ const OrderOnlinePage = () => {
             setFilteredFoods(foods.filter(food => food.category === category));
         }
     };
+
+    if (loading) {
+        return <Loader />; // Display the loader while fetching data
+    }
 
     return (
         <div style={{ background: 'linear-gradient(90deg, #F3E5AB, #A2C2E3)', minHeight: '100vh' }}>
