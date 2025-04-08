@@ -4,6 +4,7 @@ import { Container, TextField, Button, Grid, Typography, Paper, Box, IconButton,
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CategoryOutlined from '@mui/icons-material/CategoryOutlined';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as ChartTooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
 const AdminPage = () => {
@@ -14,6 +15,9 @@ const AdminPage = () => {
   const [foodData, setFoodData] = useState({ name: '', description: '', price: '', category: '' });
   const [editing, setEditing] = useState(null); // Track which item is being edited
   const [salesData, setSalesData] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedFoodId, setSelectedFoodId] = useState(null);
+
 
   // Dummy sales data
   const dummySalesData = [
@@ -80,23 +84,35 @@ const AdminPage = () => {
   };
 
   const handleDeleteClick = (id) => {
-    axios.delete(`https://food-orderingapp-backend.onrender.com/api/foods/${id}`)
+    setSelectedFoodId(id);
+    setOpen(true); // Open confirmation modal
+  };
+
+  const handleConfirmDelete = () => {
+    axios.delete(`https://food-orderingapp-backend.onrender.com/api/foods/${selectedFoodId}`)
       .then(() => {
-        setFoods(foods.filter(food => food._id !== id));
+        setFoods(foods.filter(food => food._id !== selectedFoodId));
+        setOpen(false);
       })
       .catch(error => console.error(error));
   };
 
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
+
   return (
-    <div style={{ background: 'linear-gradient(90deg, #F3E5AB, #A2C2E3)', minHeight: '100vh', paddingTop: '180px' }}>
+    <div style={{  background: 'linear-gradient(90deg, #F3E5AB, #FBA518)', minHeight: '100vh', paddingTop: '180px' }}>
       {!isAuthenticated ? (
         <Paper sx={{ padding: 3, marginTop: 5, textAlign: 'center', backdropFilter: 'blur(10px)',
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          backgroundColor: 'rgba(255, 255, 255, 0.53)',
           borderRadius: '15px',
           padding: '30px',
           margin: '80px',
           boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2)', }}>
           <Typography variant="h5" gutterBottom>Admin Login</Typography>
+          <p>For testing purposes only: Username - <strong>user</strong>, Password - <strong>pass</strong></p>
           <TextField
             label="Username"
             value={username}
@@ -105,7 +121,6 @@ const AdminPage = () => {
             margin="normal"
             sx={{ backgroundColor: '#ffffff', borderRadius: 1 }}
           />
-          <p>USERNAME is 'user'</p>
           <TextField
             label="Password"
             type="password"
@@ -115,7 +130,6 @@ const AdminPage = () => {
             margin="normal"
             sx={{ backgroundColor: '#ffffff', borderRadius: 1 }}
           />
-          <p>PASSWORD is 'pass'</p>
           <Button variant="contained" color="primary" onClick={handleLogin} sx={{ marginTop: 2 }}>
             Login
           </Button>
@@ -152,7 +166,7 @@ const AdminPage = () => {
           </Box>
 
 
-          <Paper sx={{ padding: 3, marginBottom: 3, boxShadow: 3, backgroundColor: '#ffffffcc', backdropFilter: 'blur(10px)' }}>
+          <Paper sx={{ padding: 3, marginBottom: 3, boxShadow: 3, backgroundColor: 'rgba(255, 255, 255, 0.53)', backdropFilter: 'blur(10px)' }}>
             <Typography variant="h6" sx={{ marginBottom: 2 }}>{editing ? 'Edit Food Item' : 'Add New Food Item'}</Typography>
             <TextField
               name="name"
@@ -249,6 +263,22 @@ const AdminPage = () => {
           </Grid>
         </Box>
       )}
+
+       {/* Confirmation Dialog */}
+       <Dialog open={open} onClose={handleCancel}>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to delete this item?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancel} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmDelete} color="error" variant="contained">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
