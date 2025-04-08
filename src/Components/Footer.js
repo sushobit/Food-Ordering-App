@@ -1,4 +1,4 @@
-// src/components/Footer.js
+
 import React from 'react';
 import { Box, Container, Grid, Typography, Link, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -15,7 +15,7 @@ const Footer = () => {
             <Typography variant="h6" gutterBottom>
               Contact Us
             </Typography>
-            <Typography variant="body2" style={{color:'white'}}>456 Spice Street, Gourmet Nagar, Mumbai, Maharashtra – 440084</Typography>
+            <Typography variant="body2" style={{color:'white'}}>456 Spice Street, Gourmet Nagar, Nagpur, Maharashtra – 440084</Typography>
             <Typography variant="body2" style={{color:'white'}}>Phone: +91 988899998</Typography>
             <Typography variant="body2" style={{color:'white'}}>Email: foodorder@gmail.com</Typography>
           </Grid>
@@ -27,8 +27,11 @@ const Footer = () => {
             <Link href="/orderonline" color="inherit" underline="none" sx={{ display: 'block', marginBottom: '10px' }}>
               Order Online
             </Link>
-            <Link href="/cart" color="inherit" underline="none" sx={{ display: 'block', marginBottom: '10px' }}>
-            Cart
+            <Link href="/blog" color="inherit" underline="none" sx={{ display: 'block', marginBottom: '10px' }}>
+              Blogs
+            </Link>
+            <Link href="/contactus" color="inherit" underline="none" sx={{ display: 'block', marginBottom: '10px' }}>
+            Contact Us
             </Link>
             <Link href="/admin" color="inherit" underline="none" sx={{ display: 'block', marginBottom: '10px' }}>
             Admin Login
@@ -57,7 +60,7 @@ const Footer = () => {
         </Grid>
 
         <Box textAlign="center" mt={5}>
-          <Typography variant="body2" style={{color:'white'}}>&copy; 2024 HungryHub. All rights reserved.</Typography>
+          <Typography variant="body2" style={{color:'white'}}>&copy; 2025 HungryHub. All rights reserved.</Typography>
         </Box>
       </Container>
     </Box>
