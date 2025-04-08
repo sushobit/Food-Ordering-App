@@ -4,6 +4,7 @@ import axios from 'axios';
 import HeroSection from '../Components/HeroSection/HeroSection';
 import OrderOnlinePage from './OrderOnlinePage';
 import WeekendCarousel from '../Components/WeekendCarousel';
+import HeroSection02 from '../Components/HeroSection02/HeroSection02';
 
 
 const UserPage = () => {
@@ -49,9 +50,10 @@ const UserPage = () => {
   }, [selectedItems]);
 
   return (
-    <div style={{ background: 'linear-gradient(90deg, #F3E5AB, #A2C2E3)', minHeight: '100vh' }}>
+    <div style={{  background: 'linear-gradient(90deg, #F3E5AB, #FBA518)', minHeight: '100vh' }}>
       <HeroSection />
       <WeekendCarousel />
+      <HeroSection02 />
       <OrderOnlinePage />
     </div>
   );
