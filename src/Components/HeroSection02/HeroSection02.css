@@ -1,0 +1,169 @@
+.hero-section {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 1.5rem;
+    background-color: white;
+  }
+  
+  /* ✅ Wrapper to hold image & badges */
+  .hero-image-outer {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    margin: auto;
+    z-index: 1;
+    overflow: visible; /* Allow badges to be visible outside the circle */
+  }
+  
+  /* ✅ The circular image */
+  .hero-image-wrapper {
+    width: 480px;
+    height: 480px;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 9999px;
+    overflow: hidden; /* Keeps the image circular */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(10px 10px 20px #f97316);
+  }
+  
+  .hero-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+  
+  /* ✅ Position badges outside the circle */
+  .hero-badge-top {
+    position: absolute;
+    top: -30px;  /* Out of circle */
+    left: -30px; /* Move slightly outside */
+    z-index: 9999;
+    background-color: white;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    color: #f97316;
+  }
+  
+  .hero-badge-top img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    margin-right: 0.5rem;
+  }
+  
+  .hero-badge-top .star {
+    color: #facc15;
+    margin-left: 0.5rem;
+  }
+  
+  .hero-badge-bottom {
+    position: absolute;
+    bottom: -30px; /* Move it further below the circle */
+    right: -20px; /* Move it outside */
+    z-index: 10;
+    background-color: #ea580c;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 4px dashed white;
+  }
+  
+  /* ✅ Right Content Styling */
+  .hero-content {
+    max-width: 700px;
+    margin-top: 2rem;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: #f97316;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+    color: #ddd8d8;
+    margin: 1.5rem 0;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+  
+  .hero-buttons .btn-primary {
+    background-color: #f97316;
+    color: white;
+    border: none;
+  }
+  
+  .hero-buttons .btn-secondary {
+    background-color: #ea580c;
+    color: white;
+    border: none;
+  }
+  
+  .hero-icons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+  }
+  
+  .hero-icon-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .hero-icon-item .icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-section {
+      flex-direction: row;
+      padding: 4rem 3rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-image-wrapper {
+      width: 350px;
+      height: 350px;
+    }
+  
+    .hero-title {
+      font-size: 2rem;
+    }
+  
+    .hero-description {
+      font-size: 0.9rem;
+    }
+  }
+  
