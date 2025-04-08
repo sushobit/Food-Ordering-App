@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-  Typography, Button, TextField, Grid, Card, CardContent, Box, IconButton, Tooltip, Dialog, DialogActions, DialogContent
+  Typography, Button, TextField, Grid, Card, CardContent, Box, IconButton, Tooltip, Dialog, DialogActions, DialogContent, DialogTitle
 } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { motion } from 'framer-motion';
 
 const availableCoupons = {
@@ -41,11 +42,11 @@ const OrderPage = () => {
   };
 
   return (
-    <div style={{ background: 'linear-gradient(90deg, #F3E5AB, #A2C2E3)', minHeight: '100vh', padding: '20px' }}>
+    <div style={{ background: 'linear-gradient(90deg, #F3E5AB, #FBA518)', minHeight: '100vh', padding: '20px' }}>
       <Box
         sx={{
           backdropFilter: 'blur(10px)',
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          backgroundColor: 'rgba(255, 255, 255, 0.59)',
           borderRadius: '15px',
           padding: '30px',
           marginTop: '180px',
@@ -63,10 +64,12 @@ const OrderPage = () => {
                 <Card sx={{
                   borderRadius: '15px',
                   overflow: 'hidden',
-                  backgroundColor: '#1565C0',
+                  background: 'linear-gradient(135deg, rgba(229, 32, 32, 0.8), rgba(255, 103, 0, 0.8))',
                   color: '#ffffff',
-                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
-                  transition: 'transform 0.3s ease-in-out',
+                  transition: ' box-shadow 0.3s ease',
+                  '&:hover': {
+                      boxShadow: '0px 50px 80px rgba(0, 0, 0, 0.53)', // More prominent shadow on hover
+                  },
                 }}>
                   <CardContent>
                     <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{item.name}</Typography>
@@ -134,33 +137,84 @@ const OrderPage = () => {
         </Button>
 
         <Dialog
-          open={dialogOpen}
-          onClose={() => setDialogOpen(false)}
-          fullWidth
-          maxWidth="sm"
-          sx={{
-            textAlign: 'center',
-            '& .MuiDialogContent-root': {
-              padding: '50px',
-            },
-            '& .MuiTypography-root': {
-              fontSize: '2rem',
-              fontWeight: 'bold',
-              color: dialogMessage.startsWith('Invalid') ? 'error.main' : 'success.main',
-            }
-          }}
-        >
-          <DialogContent>
-            <Typography>
-              {dialogMessage}
-            </Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setDialogOpen(false)} color="primary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
+  open={dialogOpen}
+  onClose={() => setDialogOpen(false)}
+  fullWidth
+  maxWidth="sm"
+  sx={{
+    textAlign: 'center',
+    '& .MuiDialogContent-root': {
+      padding: '50px',
+      background: '#FFF3E0',
+      borderRadius: '0 0 30px 30px',
+      boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+    },
+    '& .MuiTypography-root': {
+      fontSize: '2rem',
+      fontWeight: 'bold',
+      color: dialogMessage.startsWith('Invalid') ? '#D84315' : '#76FF03',
+      marginBottom: '20px',
+    },
+    backdropFilter: 'blur(8px)',
+    padding: '10px',
+  }}
+>
+  <DialogTitle
+    sx={{
+      background: 'linear-gradient(135deg, #FF6F00, #FFAB00)',
+      padding: '20px',
+      textAlign: 'center',
+      boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)',
+    }}
+  >
+    <CheckCircleIcon
+      sx={{
+        fontSize: 70,
+        color: '#76FF03',
+        mb: 1,
+        animation: 'pulse 1.5s infinite',
+        textShadow: '0 0 20px #76FF03, 0 0 30px #76FF03',
+      }}
+    />
+    <br />
+    {dialogMessage.startsWith('Invalid') ? 'Error' : 'Success'}
+  </DialogTitle>
+
+  <DialogContent>
+    <Typography variant="body1">
+      {dialogMessage}
+    </Typography>
+  </DialogContent>
+
+  <DialogActions
+    sx={{
+      justifyContent: 'center',
+      padding: '15px',
+    }}
+  >
+    <Button
+      onClick={() => setDialogOpen(false)}
+      variant="contained"
+      sx={{
+        background: 'linear-gradient(45deg, #FF7043, #FF5722)',
+        color: 'white',
+        padding: '12px 30px',
+        borderRadius: '25px',
+        fontWeight: 'bold',
+        fontSize: '1rem',
+        boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
+        '&:hover': {
+          background: 'linear-gradient(45deg, #FF5722, #E64A19)',
+          transform: 'scale(1.05)',
+        },
+        transition: 'transform 0.3s ease, background 0.3s ease',
+      }}
+    >
+      Close
+    </Button>
+  </DialogActions>
+</Dialog>
+
       </Box>
     </div>
   );
