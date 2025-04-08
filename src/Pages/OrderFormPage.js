@@ -34,12 +34,12 @@ const OrderFormPage = () => {
   };
 
   return (
-    <div style={{ background: 'linear-gradient(90deg, #F3E5AB, #A2C2E3)', minHeight: '100vh', padding: '20px' }}>
+    <div style={{ background: 'linear-gradient(90deg, #F3E5AB, #FBA518)', minHeight: '100vh', padding: '20px' }}>
       <Container>
         <Box
           sx={{
             backdropFilter: 'blur(10px)',
-            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            backgroundColor: 'rgba(255, 255, 255, 0.61)',
             borderRadius: '15px',
             padding: '30px',
             marginTop: '140px',
@@ -121,24 +121,81 @@ const OrderFormPage = () => {
         onClose={handleCloseDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        sx={{
+          backdropFilter: 'blur(8px)',
+          padding: '10px',
+        }}
       >
-        <DialogTitle id="alert-dialog-title">
-          <Typography variant="h6" align="center" sx={{ color: '#0277BD' }}>
-            <CheckCircleIcon sx={{ fontSize: 40, color: 'green', display: 'block', margin: 'auto' }} />
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{
+            background: 'linear-gradient(135deg, #FF6F00, #FFAB00)',
+            padding: '30px',
+            textAlign: 'center',
+            boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)',
+          }}
+        >
+          <Typography variant="h4" sx={{ color: 'white', fontWeight: 'bold', mb: 2 }}>
+            <CheckCircleIcon
+              sx={{
+                fontSize: 70,
+                color: '#76FF03',
+                mb: 1,
+                animation: 'pulse 1.5s infinite',
+                textShadow: '0 0 20px #76FF03, 0 0 30px #76FF03',
+              }}
+            />
+            <br />
             Order Placed Successfully!
           </Typography>
         </DialogTitle>
-        <DialogContent>
-          <Typography variant="body1" align="center">
+
+        <DialogContent
+          sx={{
+            padding: '25px',
+            textAlign: 'center',
+            background: '#FFF3E0',
+            borderRadius: '0 0 30px 30px',
+            maxWidth: '500px',
+            margin: '0 auto',
+            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <Typography variant="body1" sx={{ color: '#D84315', fontWeight: '500', fontSize: '1.1rem' }}>
             Your order has been successfully placed. You will be redirected to the homepage shortly.
           </Typography>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
+
+        <DialogActions
+          sx={{
+            justifyContent: 'center',
+            padding: '15px',
+          }}
+        >
+          <Button
+            onClick={handleCloseDialog}
+            variant="contained"
+            sx={{
+              background: 'linear-gradient(45deg, #FF7043, #FF5722)',
+              color: 'white',
+              padding: '12px 30px',
+              borderRadius: '25px',
+              fontWeight: 'bold',
+              fontSize: '1rem',
+              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
+              '&:hover': {
+                background: 'linear-gradient(45deg, #FF5722, #E64A19)',
+                transform: 'scale(1.05)',
+              },
+              transition: 'transform 0.3s ease, background 0.3s ease',
+            }}
+          >
             OK
           </Button>
         </DialogActions>
       </Dialog>
+
+
     </div>
   );
 };
